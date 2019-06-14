@@ -1,0 +1,327 @@
+.App {
+  text-align: center;
+}
+
+.white_background {
+  background-color: white
+}
+
+.form-inline {
+  width: 90%;
+}
+
+.form-group {
+  width: 90%;
+}
+
+.input-group {
+  width: 90% !important;
+}
+
+.form-control {
+  width: 90% !important 
+  /* width of the input fields */
+}
+
+span.input-group-addon {
+  width: 50px !important;
+}
+
+.accDetails {
+  margin-left: 10%;
+  margin-bottom: -3px;
+  /* background-color: #1eff00; */
+}
+
+.accDetails1 {
+  margin-left: 5%;
+  margin-bottom: -3px;
+  /* background-color: #1eff00; */
+}
+
+.accDetails2 {
+  margin-left: 0%;
+  margin-bottom: -3px;
+  /* background-color: #1eff00; */
+}
+
+.centerbutton {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.payButton {
+  width: 50%;
+}
+
+.centered {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+
+.display {
+  display: inline
+}
+
+ .customerName {
+  list-style-type: none;
+  line-height: 1.2;
+margin-left: 20px;
+  } 
+
+
+.buttonright {
+display: flex;
+justify-content: space-between;
+padding-right:5%;
+padding-left: 5%;
+padding-top: 1%;
+padding-bottom: 1%;
+}
+
+.shoppingbasket-right {
+  /* display:flex; */
+  text-align: right;
+margin-right:30px;
+/* background-color: greenyellow;  */
+}
+
+.shoppingbasket {
+  display:flex;
+  justify-content: space-between;
+  margin-left: 15px;
+  padding-left: 15px;
+  /* background-color: greenyellow;  */
+}
+
+.badge-spaced {
+  margin-bottom: 5px;
+  margin-top: 5px; 
+}
+
+.registerTextBox {
+margin-top: 20px;
+margin-bottom: 20px;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+
+.createAccount {
+margin-left: 5%;
+margin-right: 5%;
+}
+
+.createAccountspan {
+  margin-left: 10%;
+  margin-right: 0%;
+  }
+
+.buttonRowButton {
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left:3px;
+padding-right: 3px;
+}
+
+.dotdotbutton {
+margin-left:-20px;
+background-color: #1eff00;
+}
+
+.borderdiv {
+  border-width:3px;
+  border-style: solid;
+  border-color: black;
+  opacity: .98;
+}
+
+.redText {
+  color:red;
+  text-decoration: underline;
+}
+
+.pale-yellow {
+  background-color: yellow;
+}
+
+.darkyellow {
+  background-color: hsl(54, 100%, 58%);
+  /* opacity: 0.5; */
+}
+
+.normal {
+  background-color: #fff676;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-bottom:10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: bisque;
+  border-radius: 2%;
+  box-shadow: 5px 5px #86886c;
+}
+
+.hover {
+  background-color: #ffd4d4;
+  border-style: solid;
+  border-radius: 2%;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-bottom:10px;
+  box-shadow: 5px 5px #86886c;
+}
+
+.small-description {
+  margin-left: 2%;
+  margin-right:2%;
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.title {
+  text-shadow: 2px 2px #d8d8d8;
+  font-weight: 900;
+}
+
+.smalltitle {
+  /* background-color: chocolate; */
+  font-size: 25pt;
+  /* margin-top:10px;
+  margin-bottom:25px */
+}
+
+.mediumtitle {
+  /* background-color: aqua; */
+  font-size: 25pt;
+  /* margin-top:30px;
+  margin-bottom:25px */
+}
+
+.bigtitle {
+  /* background-color: blue; */
+  font-size: 30pt;
+  /* padding-top:5px;
+  padding-bottom:25px */
+  text-shadow: 2px 2px gray;
+}
+
+.productnamebox {
+  margin-right: 20px;
+  margin-left: 20px;
+  color: black;
+  border: 1px solid;
+  padding-top: 5px;
+  box-shadow: 5px 5px rgb(158, 153, 110);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+  border-style: solid;
+  border-color: black;
+  background-color: yellow;
+  display: flex;
+  height: 65px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signOutButton {
+     margin-right: 13px;
+    margin-left: 13px; 
+  }
+
+.buttona {
+  margin-bottom: 5px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.thumbnail {
+  width: 90%;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+.white {
+  background-color: white;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.green {
+  background-color: #1eff00;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.outerdiv {
+  /* background-color: bisque; */
+  background-image: url('./components/images/jb_logo_invert.jpg');
+}
+
+.buttonsRow {
+  padding-top: 10px;
+  padding-bottom: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+
+.bannerrow {
+  width: auto;
+  border-color: yellow;
+  border-style: ridge;
+  border-width: 15px;
+}
+
+.banner {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.innerarea {
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.maindiv {
+  background-color: yellow;
+}
+
+.footer {
+  margin-top: 20px;
+  padding-top: 20px; 
+  background-color:black;
+  color:white;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-width:2px;
+  border-style: solid;
+}
