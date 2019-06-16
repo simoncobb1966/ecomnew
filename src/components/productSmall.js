@@ -59,7 +59,8 @@ class ProductSmall extends Component {
     }
 
     render() {
-        var dir = require('./images/product/' + this.props.jb.image);
+ //       var dir = require('./images/product/' + this.props.jb.image);
+ 
 
         return (
 
@@ -98,7 +99,7 @@ class ProductSmall extends Component {
                     </div>
 
                     <div>
-                        <img onClick={this.handleClickOpen} className="thumbnail img-fluid centered" src={dir} alt={this.props.jb.title}></img>
+                        <img onClick={this.handleClickOpen} className="thumbnail img-fluid centered" src={this.props.jb.image} alt={this.props.jb.title}></img>
                     </div>
 
                     <div className="small-description">

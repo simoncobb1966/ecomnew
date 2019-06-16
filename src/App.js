@@ -16,11 +16,32 @@ import Enterproduct from './components/enterproduct'
 
 // import { tsImportEqualsDeclaration } from '@babel/types';
 
+
+
 var basket = []
 
 class App extends Component {
 
   componentDidMount = () => {
+    this.getProducts()
+  }
+
+  // async getProducts() {
+  getProducts = () => {
+    axios.get("https://rxfg014ygk.execute-api.eu-west-2.amazonaws.com/dev/product")
+      .then(result => {
+        this.setState({
+          jb: result.data.product
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+
+  componentDidMount = () => {
+    this.getProducts()
     axios.get("https://f8nibhiadf.execute-api.eu-west-2.amazonaws.com/dev/tasks")
       .then(result => {
         this.setState({
@@ -34,32 +55,27 @@ class App extends Component {
   }
 
 
-enterProduct=(product)=>{
-  var newProduct = {
-    mode: "newProduct",
-    title: product.title,
-    sku: product.sku,
-    image: product.image,
-    description: product.description,
-    price: product.price,
-    priceblu: product.priceblu,
-    stockdvd: product.stockdvd,
-    stockblu: product.stockblu,
-    synopsis: product.synopsis
+  enterProduct = (product) => {
+    var newProduct = {
+      mode: "newProduct",
+      title: product.title,
+      sku: product.sku,
+      image: product.image,
+      description: product.description,
+      price: product.price,
+      priceblu: product.priceblu,
+      stockdvd: product.stockdvd,
+      stockblu: product.stockblu,
+      synopsis: product.synopsis
+    }
+    this.closeModal()
+    this.dbAddCustomer(newProduct)
   }
-  this.closeModal()
-  this.dbAddCustomer(newProduct)
-  // this.setState({
-  //   customerList: [...this.state.customerList, newCust],
-  //   customer: newCust,
-  //   login: true
-  // })
-}
 
-endAdmin=()=>{
-  this.closeModal()
-  this.setState({adminMode: false})
-}
+  endAdmin = () => {
+    this.closeModal()
+    this.setState({ adminMode: false })
+  }
 
   updateAccount = (details) => {
     this.closeModal()
@@ -95,13 +111,14 @@ endAdmin=()=>{
   }
 
   dbAddCustomer = (object) => {
-    axios.post("https://f8nibhiadf.execute-api.eu-west-2.amazonaws.com/dev/tasks",
+    axios.post("https://rxfg014ygk.execute-api.eu-west-2.amazonaws.com/dev/tasks",
       object
     )
       .then(result => {
         return (result.data.taskId)
       })
       .catch(err => {
+        alert(err)
         console.log(err)
       })
   }
@@ -190,7 +207,6 @@ endAdmin=()=>{
     }
     this.closeModal()
     this.dbAddCustomer(newCust)
-    // newCust.id=999
     this.setState({
       customerList: [...this.state.customerList, newCust],
       customer: newCust,
@@ -258,7 +274,7 @@ endAdmin=()=>{
 
 
   state = {
-    adminMode: true,
+    adminMode: false,
     isLoaded: false,
     basketlength: 0,
     current: "none",
@@ -319,7 +335,7 @@ endAdmin=()=>{
     }
     ,
     signInPageVisible: "hide",
-    
+
     jb: [{
       title: "Doctor No",
       sku: "JB01",
@@ -564,20 +580,22 @@ endAdmin=()=>{
           </div>
         }
 
-{this.state.adminMode &&
-<>
-<h1 class="centered white_background">ADMIN MODE</h1>
-<div className="centered">
-<Button className="buttona" onClick={() => { this.openModal("enterproduct") }} >ENTER PRODUCT</Button>
-<Enterproduct
-            closeModal={this.closeModal}
-            openClose={this.state.enterproduct}
-            enterProduct={this.enterProduct}
-            endAdmin={this.endAdmin}
-          />
-          </div>
-</>
-}
+        {this.state.adminMode &&
+          <>
+            <h1 className="centered white_background">ADMIN MODE</h1>
+            <div className="centered">
+
+              <Button className="buttona" onClick={() => { this.openModal("enterproduct") }} >ENTER PRODUCT</Button>
+              <Enterproduct
+                closeModal={this.closeModal}
+                openClose={this.state.enterproduct}
+                enterProduct={this.enterProduct}
+                endAdmin={this.endAdmin}
+              />
+              <Button className="buttona" onClick={() => { this.endAdmin() }} >EXIT ADMIN MODE</Button>
+            </div>
+          </>
+        }
 
 
         <div>

@@ -115,7 +115,7 @@ class Enterproduct extends Component {
                                     EXIT ADMIN MODE
             </Button>
                                 <Button onClick={this.submit} variant="primary" >
-                                    Register
+                                    ADD PRODUCT
             </Button>
                             </Modal.Footer>
                         </form>
