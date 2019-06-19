@@ -26,7 +26,6 @@ class App extends Component {
     this.getProducts()
   }
 
-  // async getProducts() {
   getProducts = () => {
     axios.get("https://rxfg014ygk.execute-api.eu-west-2.amazonaws.com/dev/product")
       .then(result => {
@@ -38,22 +37,6 @@ class App extends Component {
         console.log(err)
       })
   }
-
-
-  componentDidMount = () => {
-    this.getProducts()
-    axios.get("https://f8nibhiadf.execute-api.eu-west-2.amazonaws.com/dev/tasks")
-      .then(result => {
-        this.setState({
-          customerList: result.data.tasks,
-          isLoaded: true
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
 
   enterProduct = (product) => {
     var newProduct = {
@@ -110,17 +93,26 @@ class App extends Component {
       })
   }
 
-  dbAddCustomer = (object) => {
-    axios.post("https://rxfg014ygk.execute-api.eu-west-2.amazonaws.com/dev/tasks",
+  async dbAddCustomer(object) {
+    let response = await axios.post("https://rxfg014ygk.execute-api.eu-west-2.amazonaws.com/dev/tasks",
       object
     )
-      .then(result => {
-        return (result.data.taskId)
+    let { data } = response
+    if (object.mode === "signIn") {
+      if (data.taskId.length===0){
+        this.setState({error: true})
+        return 
+      }
+      this.setState({
+        customer: data.taskId[0],
+        login: true,
+        error: false
       })
-      .catch(err => {
-        alert(err)
-        console.log(err)
-      })
+      this.closeModal()
+      return 
+    } else {
+      return (data.taskId)
+    }
   }
 
   logOut = () => {
@@ -246,23 +238,12 @@ class App extends Component {
   }
 
   signIn = (details) => {
-    this.closeModal()
-
-    if (details.email === "admin" && details.password === "admin") {
+      if (details.email === "admin" && details.password === "admin") {
       this.setState({ adminMode: true })
+      this.closeModal()
     } else {
-
-      const list = this.state.customerList
-      for (let i = 0; i < this.state.customerList.length; i++) {
-        if (list[i].email === details.email) {
-          var existingcustomer = list[i]
-        }
-      }
-      this.setState({
-        customer: existingcustomer,
-        login: true
-      })
-
+      details.mode = "signIn"
+      this.dbAddCustomer(details)
     }
   }
 
@@ -271,9 +252,8 @@ class App extends Component {
     return uuid
   }
 
-
-
   state = {
+    error: false,
     adminMode: false,
     isLoaded: false,
     basketlength: 0,
@@ -533,10 +513,9 @@ class App extends Component {
         {
           this.state.signin &&
           <Signin
-            closeModal={this.closeModal}
             openClose={this.state.signin}
             signIn={this.signIn}
-            customerList={this.state.customerList}
+            error={this.state.error}
           />
         }
 

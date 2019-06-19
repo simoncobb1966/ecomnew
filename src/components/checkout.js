@@ -95,7 +95,7 @@ class Checkout extends Component {
 
         return (
             <>
-                <element>
+                {/* <element> */}
 
                     <Modal show={this.props.openClose} onHide={this.props.closeModal}>
                         <Modal.Header closeButton>
@@ -187,7 +187,7 @@ class Checkout extends Component {
 
                         </Modal.Footer>
                     </Modal>
-                </element>
+                {/* </element> */}
             </>
         );
     }

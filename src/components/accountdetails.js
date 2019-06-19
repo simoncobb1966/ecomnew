@@ -65,7 +65,7 @@ class Accountdetails extends Component {
 
         return (
             <>
-                <element>
+                {/* <element> */}
 
                     <Modal show={this.props.openClose} onHide={this.props.closeModal}>
                         <Modal.Header closeButton>
@@ -123,7 +123,7 @@ class Accountdetails extends Component {
 
                         </Form>
                     </Modal>
-                </element>
+                {/* </element> */}
             </>
         );
     }

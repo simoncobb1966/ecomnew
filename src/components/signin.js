@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+// import axios from "axios"
 // import Button from '@material-ui/core/Button';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-// import FormControl from 'react-bootstrap/FormControl'
+//  import FormControl from 'react-bootstrap/FormControl'
 // import Row from 'react-bootstrap/Row'
 // import Col from 'react-bootstrap/Col'
 // done with Bootstrap modal
@@ -14,9 +15,10 @@ class SignIn extends Component {
 
     state = {
         // show: false,
-        errorMessage: '',
+        // errorMessage: '',
         email: '',
-        password: ''
+        password: '',
+        // firstTime: 0
     };
 
 
@@ -32,67 +34,55 @@ class SignIn extends Component {
         })
     }
 
-    signInHandler = (customerList) => {
+    signInHandler = () => {
         var details = {
             email: "",
             password: ""
         }
-        const signIn = this.props.signIn
-        const email = this.state.email
-        const password = this.state.password
-if (email==="admin" && password==="admin"){
-    details.email = "admin"
-    details.password = "admin"
-    signIn(details)
-}
-        customerList.forEach(function (item, i) {
-            if (item.email === email) {
-                details.email = item.email
-                if (item.password === password) {
-                    details.password = item.password
-                    signIn(details)
-                }
-            }
-        })
+        // const signIn = this.props.signIn
+        // const email = this.state.email
+        // const password = this.state.password
+        details.email = this.state.email
+        details.password = this.state.password
 
-        
+        if (details.password !== "" & details.email !== "") {
+            this.props.signIn(details)
+        }
 
-
-        if (details.password === "") { this.setState({ errorMessage: "Wrong password, please re-enter" }) }
-        if (details.email === "") { this.setState({ errorMessage: "Email not find, please re-enter or register" }) }
     }
+
 
     render() {
         return (
             <>
-                <element>
+                <Modal show={this.props.openClose} onHide={this.props.closeModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Sign in to James Bond Shop</Modal.Title>
+                    </Modal.Header>
 
-                    <Modal show={this.props.openClose} onHide={this.props.closeModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Sign in to James Bond Shop</Modal.Title>
-                        </Modal.Header>
+                    <Form onSubmit={this.handleSubmit} className="createAccount">
 
-                        <Form onSubmit={this.handleSubmit} className="createAccount">
-
-                            Email
+                        Email
                             <Form.Control onChange={this.handleChange} name="email" />
 
-                            Password
-                            <Form.Control type="password" controlId="formBasicPassword" onChange={this.handleChange} name="password" />
+                        Password
+                            <Form.Control type="password" controlid="formBasicPassword" onChange={this.handleChange} name="password" />
 
-                            <p className="redText centered">{this.state.errorMessage}</p>
+                        
+                        {this.props.error &&
+                        <p className="redText centered">Details not found, please try again</p>
+                        }
 
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={this.props.closeModal}>
-                                    Cancel
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.props.closeModal}>
+                                Cancel
             </Button>
-                                <Button variant="primary" onClick={() => this.signInHandler(this.props.customerList)} >
-                                    Sign In
+                            <Button variant="primary" onClick={() => this.signInHandler()} >
+                                Sign In
             </Button>
-                            </Modal.Footer>
-                        </Form>
-                    </Modal>
-                </element>
+                        </Modal.Footer>
+                    </Form>
+                </Modal>
             </>
         );
     }

@@ -54,7 +54,7 @@ class Enterproduct extends Component {
     render() {
         return (
             <>
-                <element>
+                {/* <element> */}
 
                     <Modal show={this.props.openClose} onHide={this.props.closeModal}>
                         <Modal.Header closeButton>
@@ -120,7 +120,7 @@ class Enterproduct extends Component {
                             </Modal.Footer>
                         </form>
                     </Modal>
-                </element>
+                {/* </element> */}
             </>
         );
     }
