@@ -2,6 +2,32 @@
   text-align: center;
 }
 
+.listNoDot {
+  list-style-type: none;
+}
+
+.rightJustify {
+  justify-content: right;
+}
+
+.trashcan {
+  background-color: white;
+  border: white;
+}
+
+.smallButton {
+  font-size: 10pt;
+  margin-right: 10pt;
+  margin-bottom: 3pt;
+  padding-top: 3pt;
+  margin-top: -4pt;
+}
+
+.shoppingbasket {
+  display: flex;
+  justify-content: left;
+}
+
 .white_background {
   background-color: white
 }
@@ -19,7 +45,7 @@
 }
 
 .form-control {
-  width: 90% !important 
+  width: 90% !important
   /* width of the input fields */
 }
 
@@ -59,6 +85,7 @@ span.input-group-addon {
 .centered {
   text-align: center;
 }
+
 .hide {
   display: none;
 }
@@ -67,80 +94,76 @@ span.input-group-addon {
   display: inline
 }
 
- .customerName {
+.customerName {
   list-style-type: none;
   line-height: 1.2;
-margin-left: 20px;
-  } 
-
+  margin-left: 20px;
+}
 
 .buttonright {
-display: flex;
-justify-content: space-between;
-padding-right:5%;
-padding-left: 5%;
-padding-top: 1%;
-padding-bottom: 1%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5%;
+  padding-left: 5%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .shoppingbasket-right {
-  /* display:flex; */
-  text-align: right;
-margin-right:30px;
-/* background-color: greenyellow;  */
+  float: right;
+  /* background-color: #bbff00; */
+  margin-right: 10px;
 }
 
-.shoppingbasket {
-  display:flex;
-  justify-content: space-between;
-  margin-left: 15px;
-  padding-left: 15px;
-  /* background-color: greenyellow;  */
+.shoppingbasket-right1 {
+  text-align: right;
+  margin-right: 2%;
+  /* background-color: #ff00f2; */
 }
 
 .badge-spaced {
   margin-bottom: 5px;
-  margin-top: 5px; 
+  margin-top: 5px;
 }
 
 .registerTextBox {
-margin-top: 20px;
-margin-bottom: 20px;
-padding-top: 5px;
-padding-bottom: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .createAccount {
-margin-left: 5%;
-margin-right: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .createAccountspan {
   margin-left: 10%;
   margin-right: 0%;
-  }
+}
 
 .buttonRowButton {
   margin-left: 3px;
   margin-right: 3px;
-  padding-left:3px;
-padding-right: 3px;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .dotdotbutton {
-margin-left:-20px;
-background-color: #1eff00;
+  margin-left: -20px;
+  background-color: #1eff00;
 }
 
 .borderdiv {
-  border-width:3px;
+  border-width: 3px;
   border-style: solid;
   border-color: black;
   opacity: .98;
 }
 
 .redText {
-  color:red;
+  color: red;
   text-decoration: underline;
 }
 
@@ -157,7 +180,7 @@ background-color: #1eff00;
   background-color: #fff676;
   margin-top: 5px;
   margin-bottom: 10px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
   border-width: 2px;
   border-style: solid;
   border-color: bisque;
@@ -172,13 +195,13 @@ background-color: #1eff00;
   border-width: 1px;
   margin-top: 5px;
   margin-bottom: 10px;
-  padding-bottom:10px;
+  padding-bottom: 10px;
   box-shadow: 5px 5px #86886c;
 }
 
 .small-description {
   margin-left: 2%;
-  margin-right:2%;
+  margin-right: 2%;
   text-align: center;
 }
 
@@ -236,9 +259,9 @@ h4 {
 }
 
 .signOutButton {
-     margin-right: 13px;
-    margin-left: 13px; 
-  }
+  margin-right: 13px;
+  margin-left: 13px;
+}
 
 .buttona {
   margin-bottom: 5px;
@@ -248,8 +271,8 @@ h4 {
 
 .thumbnail {
   width: 90%;
-  margin-left:5%;
-  margin-right:5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .white {
@@ -279,10 +302,9 @@ h4 {
 .buttonsRow {
   padding-top: 10px;
   padding-bottom: 10px;
-margin-top: 10px;
-margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-
 
 .bannerrow {
   width: auto;
@@ -313,15 +335,16 @@ margin-bottom: 10px;
 
 .footer {
   margin-top: 20px;
-  padding-top: 20px; 
-  background-color:black;
-  color:white;;
+  padding-top: 20px;
+  background-color: black;
+  color: white;
+  ;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-width:2px;
+  border-width: 2px;
   border-style: solid;
 }

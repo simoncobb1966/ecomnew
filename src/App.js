@@ -22,6 +22,10 @@ var basket = []
 
 class App extends Component {
 
+  removeItem = (id) => {
+    alert("remove")
+  }
+
   componentDidMount = () => {
     this.getProducts()
   }
@@ -495,8 +499,10 @@ class App extends Component {
           checkedOut={this.checkedOut}
           openModal={this.openModal}
           customerList={this.state.customerList}
+          signIn={this.signIn}
           setSignIn={this.setSignIn}
           logOut={this.logOut}
+          removeItem={this.removeItem}
         />
 
 

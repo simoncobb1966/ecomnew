@@ -51,13 +51,16 @@ class Basket extends Component {
                 <li key={i} className="shoppingbasket">
                     <span>
                         {elem.qty}{" x "}
-                        {elem.title.slice(0,10)}{" "}
+                        {elem.title.slice(0, 10)}{" "}
                         {elem.format}{" @ £"}
                         {elem.cost}{" each"}
 
                     </span>
                     <span className="shoppingbasket-right">
                         {" = £"}{elem.cost * elem.qty}
+                        <Button size="small">
+          Remove
+        </Button>
                     </span>
                 </li>
 
@@ -80,9 +83,9 @@ class Basket extends Component {
                         <p className="shoppingbasket-right">
                             <strong>TOTAL PRICE = £{this.totalPrice()}</strong>
                         </p>
-{(!this.props.login) && (this.totalItems()>0) &&
-<p className="shoppingbasket redText">Please SIGN IN or REGISTER to enable checkout.</p>
-}
+                        {(!this.props.login) && (this.totalItems() > 0) &&
+                            <p className="shoppingbasket redText">Please SIGN IN or REGISTER to enable checkout.</p>
+                        }
 
 
                         <Modal.Footer>
