@@ -16,14 +16,13 @@ import Enterproduct from './components/enterproduct'
 
 // import { tsImportEqualsDeclaration } from '@babel/types';
 
-
-
 var basket = []
 
 class App extends Component {
 
-  removeItem = (id) => {
-    alert("remove")
+  remItem = (bask) => {
+    basket=bask
+    this.setState({basketlength: basket.length})
   }
 
   componentDidMount = () => {
@@ -498,11 +497,11 @@ class App extends Component {
           login={this.state.login}
           checkedOut={this.checkedOut}
           openModal={this.openModal}
-          customerList={this.state.customerList}
           signIn={this.signIn}
           setSignIn={this.setSignIn}
           logOut={this.logOut}
-          removeItem={this.removeItem}
+          error={this.state.error}
+          remItem={this.remItem}
         />
 
 
@@ -522,6 +521,7 @@ class App extends Component {
             openClose={this.state.signin}
             signIn={this.signIn}
             error={this.state.error}
+            closeModal={this.closeModal}
           />
         }
 
@@ -534,7 +534,7 @@ class App extends Component {
           />
         }
 
-        {
+        {/* {
           this.state.basketmodal &&
           <Basket
             closeModal={this.closeModal}
@@ -542,9 +542,11 @@ class App extends Component {
             openModal={this.openModal}
             basket={basket}
             jb={this.state.jb}
-            login={this.state.login}
+            // login={this.state.login}
+            signIn={this.signIn}
+            remItem={this.remItem}
           />
-        }
+        } */}
 
         {!this.state.adminMode &&
 

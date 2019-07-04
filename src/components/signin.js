@@ -1,30 +1,14 @@
 import React, { Component } from 'react';
-// import axios from "axios"
-// import Button from '@material-ui/core/Button';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-//  import FormControl from 'react-bootstrap/FormControl'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-// done with Bootstrap modal
 class SignIn extends Component {
 
-    // constructor(props, context) {
-    //     super(props, context);
-
     state = {
-        // show: false,
-        // errorMessage: '',
         email: '',
         password: '',
-        // firstTime: 0
+        errorMessage: ''
     };
-
-
-
-    // this.handleChange = this.handleChange.bind(this);
-    // }
 
     handleChange = (event) => {
         const name = event.target.name
@@ -35,22 +19,23 @@ class SignIn extends Component {
     }
 
     signInHandler = () => {
-        var details = {
-            email: "",
-            password: ""
-        }
-        // const signIn = this.props.signIn
-        // const email = this.state.email
-        // const password = this.state.password
+        var details = {}
         details.email = this.state.email
         details.password = this.state.password
-
+        if (details.password === "") {
+            this.setState({
+                errorMessage: "Invalid Password"
+            })
+        }
+        if (details.email.length < 5) {
+            this.setState({
+                errorMessage: "Invalid Email Address"
+            })
+        }
         if (details.password !== "" & details.email !== "") {
             this.props.signIn(details)
         }
-
     }
-
 
     render() {
         return (
@@ -68,11 +53,14 @@ class SignIn extends Component {
                         Password
                             <Form.Control type="password" controlid="formBasicPassword" onChange={this.handleChange} name="password" />
 
-                        
+
                         {this.props.error &&
-                        <p className="redText centered">Details not found, please try again</p>
+                            <p className="redText centered">Details not found, please try again</p>
                         }
 
+                        {(this.state.errorMessage.length > 0) &&
+                            <p className="redText centered">{this.state.errorMessage}</p>
+                        }
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.props.closeModal}>
                                 Cancel
@@ -87,6 +75,5 @@ class SignIn extends Component {
         );
     }
 }
-
 
 export default SignIn;

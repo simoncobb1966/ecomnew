@@ -1,49 +1,30 @@
 import React, { Component } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Button from '@material-ui/core/Button';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 // done with Bootstrap modal
 
 class Checkout extends Component {
 
-    // constructor(props, context) {
-    //     super(props, context);
-
     state = {
-        // show: false,
         errorMessage: '',
         email: '',
-        password: ''
+        password: '',
+        errFlag: false,
+        basket: this.props.basket
     };
 
-    // this.handleChange = this.handleChange.bind(this);
-    // }
-
-
-
-    signIn = (customerList) => {
-        var details = {
-            email: "",
-            index: -1,
-            password: ""
-        }
-        // const setSignIn = this.props.setSignIn
-        const email = this.state.email
-        const password = this.state.password
-        customerList.forEach(function (item, i) {
-            if (item.email === email) {
-                details.email = item
-                details.index = i
-                if (item.password === password) {
-                    details.password = item.password
-                    this.props.setSignIn(details)
-                }
-            }
-        })
+    signIn = () => {
+        var details = {}
+        details.email = this.state.email
+        details.password = this.state.password
 
         if (details.password === "") { this.setState({ errorMessage: "Wrong password, please re-enter" }) }
-        if (details.email === "") { this.setState({ errorMessage: "Email not find, please re-enter or register" }) }
+        if (details.email === "") { this.setState({ errorMessage: "Email address not found, please re-enter or register" }) }
+
+        if (details.password !== "" & details.email !== "") {
+            this.props.signIn(details)
+            this.setState({ errFlag: true })
+        }
     }
 
     makepayment = (amount) => {
@@ -55,13 +36,14 @@ class Checkout extends Component {
         const name = event.target.name
         this.setState({
             [name]: event.target.value,
-            errorMessage: ''
+            errorMessage: '',
+            errFlag: false
         })
     }
 
     totalPrice = () => {
         var totalPrice = 0
-        const basket = this.props.basket
+        const basket = this.state.basket
         for (let i = 0; i < basket.length; i++) {
             totalPrice = totalPrice + (basket[i].qty * basket[i].cost)
         }
@@ -70,23 +52,25 @@ class Checkout extends Component {
 
     totalItems = () => {
         var total = 0
-        for (let i = 0; i < this.props.basket.length; i++) {
-            total = total + this.props.basket[i].qty
+        for (let i = 0; i < this.state.basket.length; i++) {
+            total = total + this.state.basket[i].qty
         }
         return total
     }
 
-    remItem = (id) => {
-        alert(id)
-    }
-
     render() {
 
-        var products = this.props.basket.map(((elem, i) => {
+    const remItem = (id) => {
+            var newBasket = this.state.basket.filter((item, index)  => (index !== id))
+            this.setState({basket: newBasket})
+            this.props.remItem(newBasket)
+        }
+
+            var products = this.state.basket.map(((elem, i) => {
             return (
                 <li key={i} className="listNoDot">
                     <span>
-                        <button onClick={() => { this.remItem(i) }} className="trashcan"><i className="fa fa-trash"></i></button>
+                        <button onClick={() => { let t=remItem(i) }} className="trashcan"><i className="fa fa-trash"></i></button>
                     </span>
                     <span>
                         {elem.qty}{" x "}
@@ -99,17 +83,10 @@ class Checkout extends Component {
                     </span>
                 </li>
             )
-
         }))
-
-
-
-
 
         return (
             <>
-                {/* <element> */}
-
                 <Modal show={this.props.openClose} onHide={this.props.closeModal}>
                     <Modal.Header closeButton>
                         {(this.totalItems() === 1) &&
@@ -144,6 +121,11 @@ class Checkout extends Component {
                                 onChange={this.handleChange}
                                 className="form-control registerTextBox">
                             </input>
+
+                            {this.props.error && this.state.errFlag &&
+                                <p className="redText centered">Details not found, please try again</p>
+                            }
+
                             {this.state.errorMessage.length > 1 &&
                                 <p className="redText centered">{this.state.errorMessage}</p>
                             }
@@ -201,7 +183,6 @@ class Checkout extends Component {
 
                     </Modal.Footer>
                 </Modal>
-                {/* </element> */}
             </>
         );
     }

@@ -6,7 +6,7 @@ class Header extends Component {
         return (
 
                     <div className="row banner">
-                            <img className="img-fluid borderdiv bannerrow" src="https://jb-shop.s3.eu-west-2.amazonaws.com/jb_shop_site_images/jb_banner.png" alt="banner"></img>
+                            <img className="img-fluid borderdiv bannerrow" src="https://jb-shop.s3.eu-west-2.amazonaws.com/jb_shop_site_images/top-banner.png" alt="banner"></img>
                         </div>  
 
         )
