@@ -19,50 +19,38 @@ import Enterproduct from './components/enterproduct'
 // import { tsImportEqualsDeclaration } from '@babel/types';
 
 var basket = []
-// var numTodisplay = 8
-// var firstTodisplay = 0
+
 
 class App extends Component {
 
-  paginate = (pag) => {
-    if (pag === "R" && this.state.lastDisplayed<this.state.jb.length-1) {
-      let firstTodisplay = this.state.lastDisplayed + 1
-      let newArray = []
-      var count = 0
-      for (let i = 0; i < this.state.numTodisplay; i++) {
-        if ((firstTodisplay + i) < this.state.jb.length) {
-          count = count + 1
-          newArray.push(this.state.jb[firstTodisplay + i])
-        }
-      }
-      this.setState({ displayItems: newArray })
-      if (firstTodisplay + count <= this.state.jb.length) {
-        this.setState({ lastDisplayed: this.state.lastDisplayed + count })
-      }
-    }
-    if (pag === "L" && this.state.lastDisplayed<this.state.jb.length) {
 
-      let firstTodisplay = this.state.lastDisplayed - (2 * this.state.numTodisplay) + 1
-      if (this.state.lastDisplayed+this.state.numTodisplay>this.state.jb.length){
-        firstTodisplay=this.state.lastDisplayed-this.state.numTodisplay+1 
-      }
-      if (firstTodisplay < 0) {
-        firstTodisplay = 0
-      }
-      let newArray = []
-      for (let i = 0; i < this.state.numTodisplay; i++) {
+  paginate = (pag) => {
+    if (pag === "R" && ((this.state.pageDisplayed + 1) * this.state.numTodisplay) < this.state.jb.length) {
+      let firstTodisplay = ((this.state.pageDisplayed + 1) * this.state.numTodisplay)
+      this.doDisplay(firstTodisplay)
+      this.setState({ pageDisplayed: this.state.pageDisplayed + 1 })
+    }
+    if (pag === "L" && this.state.pageDisplayed > 0) {
+      let firstTodisplay = ((this.state.pageDisplayed - 1) * this.state.numTodisplay)
+      this.doDisplay(firstTodisplay)
+      this.setState({ pageDisplayed: this.state.pageDisplayed - 1 })
+    }
+    // If PAG is a number
+    if (pag !== "L" && pag !== "R") {
+      this.doDisplay(pag * this.state.numTodisplay)
+      this.setState({ pageDisplayed: pag })
+    }
+  }
+
+
+  doDisplay = (firstTodisplay) => {
+    let newArray = []
+    for (let i = 0; i < this.state.numTodisplay; i++) {
+      if (firstTodisplay + i < this.state.jb.length) {
         newArray.push(this.state.jb[firstTodisplay + i])
       }
-      this.setState({
-        displayItems: newArray,
-        lastDisplayed: this.state.lastDisplayed - this.state.numTodisplay
-      })
-      if (firstTodisplay < this.state.numTodisplay) {
-        this.setState({
-          lastDisplayed: this.state.numTodisplay - 1
-        })
-      }
     }
+    this.setState({displayItems: newArray})
   }
 
   remItem = (bask) => {
@@ -87,8 +75,18 @@ class App extends Component {
         }
         this.setState({
           displayItems: newArray,
-          lastDisplayed: this.state.numTodisplay - 1
+          // set the first page to be displayed to 0
+          pageDisplayed: 0
         })
+
+        newArray = []
+        for (let i = 1; i < (this.state.jb.length / this.state.numTodisplay) + 1; i++) {
+          // let newobj = "<span><button key={i} onClick={() => { this.paginate("{i}") }}>{i}</button></span>"
+          let key = i
+          newArray.push(key)
+        }
+        this.setState({ paginateNums: newArray })
+        console.log(newArray)
       })
       .catch(err => {
         console.log(err)
@@ -310,9 +308,10 @@ class App extends Component {
   }
 
   state = {
+    paginateNums: [],
     displayItems: [],
     numTodisplay: 8,
-    lastDisplayed: 0,
+    pageDisplayed: 0,
     error: false,
     adminMode: false,
     isLoaded: false,
@@ -501,6 +500,17 @@ class App extends Component {
 
   render() {
 
+    const pagNums = this.state.paginateNums.map((item, i) =>
+      <span><li className="pagContainer" key={this.UUID.toString()}>
+        {i===this.state.pageDisplayed &&
+        <button className="pagButtonselected h2" key={this.UUID.toString()} onClick={() => { this.paginate(i) }}>{i + 1}</button>
+        }
+        {i!==this.state.pageDisplayed &&
+          <button className="pagButton h2" key={this.UUID.toString()} onClick={() => { this.paginate(i) }}>{i + 1}</button>
+          }
+        </li></span>
+    )
+
     return (
 
       <div className="outerdiv" >
@@ -510,10 +520,8 @@ class App extends Component {
           </div>
         </div>
 
-        {/* 
-{this.state.customer.id} */}
+
         {/* {this.state.login} {this.state.customer.firstName} {this.state.customer.secondName} {this.state.customer.address1} {this.state.customer.address2} {this.state.customer.address3} {this.state.customer.address4} {this.state.customer.address5} {this.state.customer.address6}  {this.state.customer.email} {this.state.customer.password} */}
-        {this.state.lastDisplayed}
         <div className="centered buttonsRow" >
           {/* // buttons row */}
           < span >
@@ -616,33 +624,16 @@ class App extends Component {
 
                 })
               }
-
-              {/* {
-                this.state.jb.map((item, i) => {
-                  if ((i => this.state.firstTodisplay) && (i <= this.state.firstTodisplay + (this.state.numTodisplay - 1))) {
-                    return <Productsmall
-                      key={item.sku}
-                      value={item.sku}
-                      jb={item}
-                      addDVDToBasket={this.addDVDToBasket}
-                      addBluToBasket={this.addBluToBasket}
-                    />
-                  } else { return "" }
-                })
-              } */}
-
-
-              {/* Pagination */}
-
-              <div className="rightJustify1">
-                <span><button onClick={() => { this.paginate("L") }}>{'<'}</button></span>
-                <span> 1 2 3 4 </span>
-                <span><button onClick={() => { this.paginate("R") }}>{'>'}</button></span>
-              </div>
-
             </div>
-          </div>
+            {/* Pagination */}
 
+            <div className="middleJustify">
+              <button className="pagButton h2" onClick={() => { this.paginate("L") }}>{'<'}</button>
+              {pagNums}
+              <button className="pagButton h2" onClick={() => { this.paginate("R") }}>{'>'}</button>
+            </div>
+
+          </div>
 
         }
 
