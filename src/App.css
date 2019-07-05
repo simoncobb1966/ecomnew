@@ -6,6 +6,9 @@
   list-style-type: none;
 }
 
+.rightJustify1 {
+  float: right;
+}
 .rightJustify {
   justify-content: right;
 }

@@ -8,21 +8,66 @@ import Footer from './components/footer';
 import Productsmall from './components/productSmall';
 import Signin from './components/signin'
 import Register from './components/register'
-import Basket from './components/basket'
+// import Basket from './components/basket'
 import Checkout from './components/checkout'
 import Accountdetails from './components/accountdetails'
 import axios from "axios"
 import Enterproduct from './components/enterproduct'
+// import Pagination from 'react-bootstrap/Pagination'
+// import PageItem from 'react-bootstrap/PageItem'
 
 // import { tsImportEqualsDeclaration } from '@babel/types';
 
 var basket = []
+// var numTodisplay = 8
+// var firstTodisplay = 0
 
 class App extends Component {
 
+  paginate = (pag) => {
+    if (pag === "R" && this.state.lastDisplayed<this.state.jb.length-1) {
+      let firstTodisplay = this.state.lastDisplayed + 1
+      let newArray = []
+      var count = 0
+      for (let i = 0; i < this.state.numTodisplay; i++) {
+        if ((firstTodisplay + i) < this.state.jb.length) {
+          count = count + 1
+          newArray.push(this.state.jb[firstTodisplay + i])
+        }
+      }
+      this.setState({ displayItems: newArray })
+      if (firstTodisplay + count <= this.state.jb.length) {
+        this.setState({ lastDisplayed: this.state.lastDisplayed + count })
+      }
+    }
+    if (pag === "L" && this.state.lastDisplayed<this.state.jb.length) {
+
+      let firstTodisplay = this.state.lastDisplayed - (2 * this.state.numTodisplay) + 1
+      if (this.state.lastDisplayed+this.state.numTodisplay>this.state.jb.length){
+        firstTodisplay=this.state.lastDisplayed-this.state.numTodisplay+1 
+      }
+      if (firstTodisplay < 0) {
+        firstTodisplay = 0
+      }
+      let newArray = []
+      for (let i = 0; i < this.state.numTodisplay; i++) {
+        newArray.push(this.state.jb[firstTodisplay + i])
+      }
+      this.setState({
+        displayItems: newArray,
+        lastDisplayed: this.state.lastDisplayed - this.state.numTodisplay
+      })
+      if (firstTodisplay < this.state.numTodisplay) {
+        this.setState({
+          lastDisplayed: this.state.numTodisplay - 1
+        })
+      }
+    }
+  }
+
   remItem = (bask) => {
-    basket=bask
-    this.setState({basketlength: basket.length})
+    basket = bask
+    this.setState({ basketlength: basket.length })
   }
 
   componentDidMount = () => {
@@ -34,6 +79,15 @@ class App extends Component {
       .then(result => {
         this.setState({
           jb: result.data.product
+        })
+        // move products into the ones to view
+        let newArray = []
+        for (let i = 0; i < this.state.numTodisplay; i++) {
+          newArray.push(this.state.jb[i])
+        }
+        this.setState({
+          displayItems: newArray,
+          lastDisplayed: this.state.numTodisplay - 1
         })
       })
       .catch(err => {
@@ -102,9 +156,9 @@ class App extends Component {
     )
     let { data } = response
     if (object.mode === "signIn") {
-      if (data.taskId.length===0){
-        this.setState({error: true})
-        return 
+      if (data.taskId.length === 0) {
+        this.setState({ error: true })
+        return
       }
       this.setState({
         customer: data.taskId[0],
@@ -112,7 +166,7 @@ class App extends Component {
         error: false
       })
       this.closeModal()
-      return 
+      return
     } else {
       return (data.taskId)
     }
@@ -241,7 +295,7 @@ class App extends Component {
   }
 
   signIn = (details) => {
-      if (details.email === "admin" && details.password === "admin") {
+    if (details.email === "admin" && details.password === "admin") {
       this.setState({ adminMode: true })
       this.closeModal()
     } else {
@@ -256,6 +310,9 @@ class App extends Component {
   }
 
   state = {
+    displayItems: [],
+    numTodisplay: 8,
+    lastDisplayed: 0,
     error: false,
     adminMode: false,
     isLoaded: false,
@@ -453,12 +510,10 @@ class App extends Component {
           </div>
         </div>
 
-        {/* var testUUID = uuid.v1() */}
-
         {/* 
 {this.state.customer.id} */}
         {/* {this.state.login} {this.state.customer.firstName} {this.state.customer.secondName} {this.state.customer.address1} {this.state.customer.address2} {this.state.customer.address3} {this.state.customer.address4} {this.state.customer.address5} {this.state.customer.address6}  {this.state.customer.email} {this.state.customer.password} */}
-
+        {this.state.lastDisplayed}
         <div className="centered buttonsRow" >
           {/* // buttons row */}
           < span >
@@ -504,8 +559,6 @@ class App extends Component {
           remItem={this.remItem}
         />
 
-
-
         <Accountdetails
           closeModal={this.closeModal}
           openClose={this.state.accountdetails}
@@ -513,7 +566,6 @@ class App extends Component {
           customer={this.state.customer}
           accountDetailsHandler={this.updateAccount}
         />
-
 
         {
           this.state.signin &&
@@ -553,7 +605,7 @@ class App extends Component {
           <div className="container maindiv">
             <div className="row justify-content-md-center">
               {
-                this.state.jb.map((item, i) => {
+                this.state.displayItems.map((item, i) => {
                   return <Productsmall
                     key={item.sku}
                     value={item.sku}
@@ -561,10 +613,37 @@ class App extends Component {
                     addDVDToBasket={this.addDVDToBasket}
                     addBluToBasket={this.addBluToBasket}
                   />
+
                 })
               }
+
+              {/* {
+                this.state.jb.map((item, i) => {
+                  if ((i => this.state.firstTodisplay) && (i <= this.state.firstTodisplay + (this.state.numTodisplay - 1))) {
+                    return <Productsmall
+                      key={item.sku}
+                      value={item.sku}
+                      jb={item}
+                      addDVDToBasket={this.addDVDToBasket}
+                      addBluToBasket={this.addBluToBasket}
+                    />
+                  } else { return "" }
+                })
+              } */}
+
+
+              {/* Pagination */}
+
+              <div className="rightJustify1">
+                <span><button onClick={() => { this.paginate("L") }}>{'<'}</button></span>
+                <span> 1 2 3 4 </span>
+                <span><button onClick={() => { this.paginate("R") }}>{'>'}</button></span>
+              </div>
+
             </div>
           </div>
+
+
         }
 
         {this.state.adminMode &&
