@@ -50,6 +50,7 @@
 .shoppingbasket {
   display: flex;
   justify-content: left;
+  margin-left: 5%;
 }
 
 .white_background {
@@ -214,12 +215,13 @@ span.input-group-addon {
 
 .hover {
   background-color: #ffd4d4;
-  border-style: solid;
-  border-radius: 2%;
-  border-width: 1px;
   margin-top: 5px;
   margin-bottom: 10px;
   padding-bottom: 10px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: bisque;
+  border-radius: 2%;
   box-shadow: 5px 5px #86886c;
 }
 

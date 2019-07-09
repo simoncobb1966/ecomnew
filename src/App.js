@@ -55,7 +55,7 @@ class App extends Component {
 
   remItem = (bask) => {
     basket = bask
-    this.setState({ basketlength: basket.length })
+    this.numItemsBasket()
   }
 
   componentDidMount = () => {
@@ -86,7 +86,6 @@ class App extends Component {
           newArray.push(key)
         }
         this.setState({ paginateNums: newArray })
-        console.log(newArray)
       })
       .catch(err => {
         console.log(err)
@@ -176,7 +175,7 @@ class App extends Component {
   }
 
   checkedOut = (amount) => {
-    this.closeModal()
+  //  this.closeModal()
     basket = []
     this.numItemsBasket()
   }
@@ -539,13 +538,10 @@ class App extends Component {
             {(!this.state.login) &&
               <Button className="buttona" onClick={() => { this.openModal("register") }} >REGISTER</Button>
             }
-            {/* CHECKOUT BUTTON
-            <Button className="buttona" onClick={() => { this.openModal("checkout") }} >CHECKOUT</Button> */}
 
             {/* BASKET BUTTON */}
             <Button onClick={() => { this.openModal("checkout") }} className="buttona">
               BASKET <Badge variant="light">{this.state.basketlength}</Badge>
-              {/* <span className="sr-only">unread messages</span> */}
             </Button>
           </span >
         </div >
@@ -593,20 +589,6 @@ class App extends Component {
             register={this.register}
           />
         }
-
-        {/* {
-          this.state.basketmodal &&
-          <Basket
-            closeModal={this.closeModal}
-            openClose={this.state.basketmodal}
-            openModal={this.openModal}
-            basket={basket}
-            jb={this.state.jb}
-            // login={this.state.login}
-            signIn={this.signIn}
-            remItem={this.remItem}
-          />
-        } */}
 
         {!this.state.adminMode &&
 

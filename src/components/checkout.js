@@ -13,6 +13,7 @@ class Checkout extends Component {
         basket: this.props.basket
     };
 
+
     signIn = () => {
         var details = {}
         details.email = this.state.email
@@ -29,6 +30,7 @@ class Checkout extends Component {
 
     makepayment = (amount) => {
         alert(`Send payment gateway £${amount}`)
+              this.setState({basket:[]})
         this.props.checkedOut(amount)
     }
 
@@ -60,17 +62,17 @@ class Checkout extends Component {
 
     render() {
 
-    const remItem = (id) => {
-            var newBasket = this.state.basket.filter((item, index)  => (index !== id))
-            this.setState({basket: newBasket})
+        const remItem = (id) => {
+            var newBasket = this.state.basket.filter((item, index) => (index !== id))
+            this.setState({ basket: newBasket })
             this.props.remItem(newBasket)
         }
 
-            var products = this.state.basket.map(((elem, i) => {
+        var products = this.state.basket.map(((elem, i) => {
             return (
                 <li key={i} className="listNoDot">
                     <span>
-                        <button onClick={() => { let t=remItem(i) }} className="trashcan"><i className="fa fa-trash"></i></button>
+                        <button onClick={() => { remItem(i) }} className="trashcan"><i className="fa fa-trash"></i></button>
                     </span>
                     <span>
                         {elem.qty}{" x "}
@@ -116,7 +118,9 @@ class Checkout extends Component {
                                 onChange={this.handleChange}
                                 className="form-control registerTextBox">
                             </input>
-                            <input type="text" name="password"
+                            <input 
+                            controlid="formBasicPassword"
+                            type="password" name="password"
                                 placeholder="Enter your password"
                                 onChange={this.handleChange}
                                 className="form-control registerTextBox">
