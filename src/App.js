@@ -377,7 +377,7 @@ class App extends Component {
     jb: [{
       title: "Doctor No",
       sku: "JB01",
-      image: "doctor_no.jpg",
+      image: "https://www.simoncobb.co.uk/jbshop2/images/product_images/doctor_no.jpg",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
       price: 9.99,
       priceblu: 14.99,
