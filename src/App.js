@@ -406,7 +406,8 @@ class App extends Component {
       {
         title: "From Russia with love",
         sku: "JB02",
-        image: "russia_with_love.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/russia_with_love.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -420,7 +421,8 @@ class App extends Component {
       {
         title: "Goldfinger",
         sku: "JB03",
-        image: "goldfinger.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/goldfinger.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -434,7 +436,8 @@ class App extends Component {
       {
         title: "Thunderball",
         sku: "JB04",
-        image: "thunderball.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/thunderball.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -463,7 +466,8 @@ class App extends Component {
       {
         title: "O.H.M.S.S.",
         sku: "JB06",
-        image: "ohmss.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/ohmss.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -477,7 +481,8 @@ class App extends Component {
       {
         title: "Diamonds Are Forever",
         sku: "JB07",
-        image: "diamonds_for_ever.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/diamonds_for_ever.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -491,7 +496,8 @@ class App extends Component {
       {
         title: "Live & Let Die",
         sku: "JB08",
-        image: "live_let_die.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/live_let_die.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -505,7 +511,8 @@ class App extends Component {
       {
         title: "The Man With The Golden Gun",
         sku: "JB09",
-        image: "golden_gun.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/golden_gun.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
@@ -519,7 +526,8 @@ class App extends Component {
       {
         title: "The Spy Who Loved Me",
         sku: "JB10",
-        image: "spy_loved_me.jpg",
+        image:
+          "https://www.simoncobb.co.uk/jbshop2/images/product_images/spy_loved_me.jpg",
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
         price: 9.99,
