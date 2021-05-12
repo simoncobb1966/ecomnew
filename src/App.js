@@ -425,7 +425,7 @@ class App extends Component {
     {
       title: "You Only Live Twice",
       sku: "JB05",
-      image: "https://www.simoncobb.co.uk/jbshop2/images/product_images/\r\nlive_twice.jpg" //image: "live_twice.jpg",
+      image: "https://www.simoncobb.co.uk/jbshop2/images/product_images/live_twice.jpg"
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et metus.",
       price: 9.99,
       priceblu: 14.99,
